@@ -1,34 +1,49 @@
+@import '_colors';
+@import '_fonts';
+
 * {
   box-sizing: border-box;
+}
+
+body {
+  background-color: $color3;
 }
 
 .wrapper {
   display: flex;
   flex-flow: row wrap;
   margin: 2em;
-  background: hotpink;
+  background-color: hotpink;
 }
 
 .wrapper > * {
-  padding: 0.5em 0.7em;
+  padding: 0.7em;
 }
 
 .header {
-  background: tomato;
+  background-color: $color2;
+  color: darken($color5, 40%);
   flex: 100%;
 }
 
 .main {
-  background: deepskyblue;
+  background-color: $color1;
   flex: 6;
+  font-family: $font-old;
+  color: darken($color5, 40%);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0px;
 }
 
 .form {
-  background: gold;
+  background-color: $color4;
   flex: 4;
 }
 
 .footer {
-  background: lightgreen;
+  background-color: $color5;
+  color: darken($color5, 30%);
   flex: 100%;
 }

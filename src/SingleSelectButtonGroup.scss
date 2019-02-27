@@ -1,0 +1,43 @@
+@import '_colors';
+@import '_fonts';
+
+@mixin button-border {
+    border-width: 2px;
+    border-style: solid;
+    border-color: $color4;
+    border-collapse: collapse;
+}
+
+@mixin button-text {
+    font-family: $font-monospace;
+    font-variant: small-caps;
+    font-weight: bold;
+    overflow: hidden;
+    text-align: center;
+}
+
+@mixin button-color {
+    background-color: $color3;
+    color: darken($color5, 30%);
+}
+
+.button-group {
+    display: flex;
+    flex-flow: row wrap;
+    margin-bottom: 0.5rem;
+}
+
+button {
+    flex-grow: 0;
+    flex-shrink: 1;
+    margin: 0px;
+    padding: 0px 0px 0.2rem 0px;
+    @include button-border;
+    @include button-text;
+    @include button-color;
+}
+
+button:hover {
+    transition: background-color 0.2s ease;
+    background-color: $color1;
+}
