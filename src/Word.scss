@@ -1,0 +1,16 @@
+@import '_colors';
+@import '_fonts';
+
+div.word {
+    background-color: lighten($color3, 12%);
+    color: darken($color5, 30%);
+    margin-bottom: 0.5rem;
+    border-width: 2px;
+    border-style: solid;
+    border-color: $color4;
+    padding: 0.8rem 0;
+    text-align: center;
+
+    font-family: $font-old;
+    font-size: 1.6rem;
+}

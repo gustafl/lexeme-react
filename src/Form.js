@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Word from './Word';
 import SelectionButtonGroup from './SelectionButtonGroup';
 import './Form.scss';
 
@@ -50,8 +51,11 @@ class Form extends Component {
             { id: 'massNoun', text: 'mass noun' }
         ];
 
+        const word = 'bizarre';
+
         return (
             <div>
+                <Word word={word} />
                 <SelectionButtonGroup buttons={lexicalCategoryButtons} />
                 <SelectionButtonGroup buttons={genderButtons} />
                 <SelectionButtonGroup buttons={numberButtons} />
