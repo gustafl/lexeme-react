@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Word from './Word';
+import Translations from './Translations';
 import SelectionButtonGroup from './SelectionButtonGroup';
 import './Form.scss';
 
@@ -56,6 +57,7 @@ class Form extends Component {
         return (
             <div>
                 <Word word={word} />
+                <Translations text={'add translation'} />
                 <SelectionButtonGroup buttons={lexicalCategoryButtons} />
                 <SelectionButtonGroup buttons={genderButtons} />
                 <SelectionButtonGroup buttons={numberButtons} />

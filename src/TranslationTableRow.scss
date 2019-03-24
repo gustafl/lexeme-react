@@ -1,0 +1,32 @@
+@import '_colors';
+@import '_fonts';
+@import '_mixins';
+
+.translation-table-row {
+    display: flex;
+    div.language {
+        @include button-border;
+        @include button-text;
+        flex-basis: 50px;
+        text-align: center;
+        background-color: $color3;
+        color: darken($color5, 30%);
+    }
+    div.translation {
+        @include button-border;
+        @include button-text;
+        flex-grow: 1;
+        background-color: lighten($color3, 12%);
+        color: darken($color5, 30%);
+        text-align: left;
+        padding-left: 10px;
+        padding-bottom: 6px;
+    }
+    button {
+        @include button-border;
+        @include button-text;
+        @include button-color;
+        flex-basis: 100px;
+        padding-bottom: 6px;
+    }
+}

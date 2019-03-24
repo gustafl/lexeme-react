@@ -1,0 +1,22 @@
+@import '_colors';
+@import '_fonts';
+
+@mixin button-border {
+    border-width: 2px;
+    border-style: solid;
+    border-color: $color4;
+    border-collapse: collapse;
+}
+
+@mixin button-text {
+    font-family: $font-monospace;
+    font-variant: small-caps;
+    font-weight: bold;
+    overflow: hidden;
+    text-align: center;
+}
+
+@mixin button-color {
+    background-color: $color3;
+    color: darken($color5, 30%);
+}

@@ -2,21 +2,18 @@
 @import '_fonts';
 @import '_mixins';
 
-.button-group {
+.translation-section {
+    margin-bottom: 0.5rem;
     button {
         @include button-border;
         @include button-text;
         @include button-color;
         padding-bottom: 6px;
+        width: 100%;
+        outline: none;
     }
     button:hover {
         transition: background-color 0.2s ease;
         background-color: lighten($color3, 4%);
     }
-    button:focus {
-        outline: none;
-    }
-    button.on {
-        background-color: lighten($color3, 12%);
-    }
-}    
+}
