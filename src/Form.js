@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import SingleSelectButtonGroup from './SingleSelectButtonGroup';
+import SelectionButtonGroup from './SelectionButtonGroup';
 import './Form.scss';
 
-class App extends Component {
+class Form extends Component {
     render() {
 
         const lexicalCategoryButtons = [
-            { id: 'noun', text: 'noun', class: 'noun' },
+            { id: 'noun', text: 'noun' },
             { id: 'verb', text: 'verb' },
             { id: 'adjective', text: 'adjective' },
             { id: 'pronoun', text: 'pronoun' },
@@ -47,22 +47,22 @@ class App extends Component {
         ];
 
         const massNounButtons = [
-            { id: 'masseNoun', text: 'mass noun' }
+            { id: 'massNoun', text: 'mass noun' }
         ];
 
         return (
-            <form>
-                <SingleSelectButtonGroup className="lexical-category" buttons={lexicalCategoryButtons}/>
-                <SingleSelectButtonGroup className="lexical-category" buttons={genderButtons}/>
-                <SingleSelectButtonGroup className="lexical-category" buttons={numberButtons}/>
-                <SingleSelectButtonGroup className="lexical-category" buttons={properCommonButtons}/>
-                <SingleSelectButtonGroup className="lexical-category" buttons={abstractConcreteButtons}/>
-                <SingleSelectButtonGroup className="lexical-category" buttons={countableUncountableButtons}/>
-                <SingleSelectButtonGroup className="lexical-category" buttons={collectiveNounButtons}/>
-                <SingleSelectButtonGroup className="lexical-category" buttons={massNounButtons}/>
-            </form>
+            <div>
+                <SelectionButtonGroup buttons={lexicalCategoryButtons} />
+                <SelectionButtonGroup buttons={genderButtons} />
+                <SelectionButtonGroup buttons={numberButtons} />
+                <SelectionButtonGroup buttons={properCommonButtons} />
+                <SelectionButtonGroup buttons={abstractConcreteButtons} />
+                <SelectionButtonGroup buttons={countableUncountableButtons} />
+                <SelectionButtonGroup buttons={collectiveNounButtons} />
+                <SelectionButtonGroup buttons={massNounButtons} />
+            </div>
         );
     }
 }
 
-export default App;
+export default Form;

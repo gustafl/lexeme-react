@@ -21,12 +21,6 @@
     color: darken($color5, 30%);
 }
 
-.button-group {
-    display: flex;
-    flex-flow: row wrap;
-    margin-bottom: 0.5rem;
-}
-
 button {
     flex-grow: 0;
     flex-shrink: 1;
@@ -39,5 +33,13 @@ button {
 
 button:hover {
     transition: background-color 0.2s ease;
-    background-color: $color1;
+    background-color: lighten($color3, 4%);
+}
+
+button:focus {
+    outline: none;
+}
+
+button.on {
+    background-color: lighten($color3, 12%);
 }
