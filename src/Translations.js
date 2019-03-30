@@ -10,7 +10,8 @@ class Translations extends Component {
             readyForInput: false,
             translations: [
                 { language: 'sv', text: 'bisarr' },
-                { language: 'sv', text: 'konstig' }
+                { language: 'sv', text: 'konstig' },
+                { language: 'sv', text: 'underlig' }
             ]
         };
         this.handleClick = this.handleClick.bind(this);
