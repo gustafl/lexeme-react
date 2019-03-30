@@ -4,19 +4,19 @@ self.__precacheManifest = [
     "url": "/lexeme-react/static/js/runtime~main.91765840.js"
   },
   {
-    "revision": "f3ff83be937d7a8fce1e",
-    "url": "/lexeme-react/static/js/main.f3ff83be.chunk.js"
+    "revision": "f8b8164fcd7ee21ef287",
+    "url": "/lexeme-react/static/js/main.f8b8164f.chunk.js"
   },
   {
     "revision": "e330cb724c0a43195191",
     "url": "/lexeme-react/static/js/2.e330cb72.chunk.js"
   },
   {
-    "revision": "f3ff83be937d7a8fce1e",
+    "revision": "f8b8164fcd7ee21ef287",
     "url": "/lexeme-react/static/css/main.31234d31.chunk.css"
   },
   {
-    "revision": "4651350978eefd6753bda415e4c40cb2",
+    "revision": "557e92fbcebdee8b4054477907d799ce",
     "url": "/lexeme-react/index.html"
   }
 ];
