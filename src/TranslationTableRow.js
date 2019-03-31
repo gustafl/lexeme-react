@@ -7,7 +7,7 @@ class TranslationTableRow extends Component {
             <div className="translation-table-row">
                 <div className="language">{this.props.language}</div>
                 <div className="translation">{this.props.text}</div>
-                <button type="button">remove</button>
+                <button type="button" onClick={() => this.props.handleRemove(this.props.text)}>remove</button>
             </div>
         );
     }

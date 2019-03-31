@@ -11,8 +11,7 @@ class TranslationTable extends Component {
                     key={index}
                     language={translation.language}
                     text={translation.text}
-                    onClick={this.handleRemove} />
-                
+                    handleRemove={this.props.handleRemove} />
             );
         });
         return (
