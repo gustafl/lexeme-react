@@ -57,7 +57,7 @@ class Form extends Component {
         return (
             <div>
                 <Word word={word} />
-                <Translations text={'add translation'} />
+                <Translations />
                 <SelectionButtonGroup buttons={lexicalCategoryButtons} />
                 <SelectionButtonGroup buttons={genderButtons} />
                 <SelectionButtonGroup buttons={numberButtons} />
