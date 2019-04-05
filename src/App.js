@@ -23,7 +23,6 @@ class App extends Component {
     }
 
     handleImport(content) {
-        alert('handleImport');
         this.setState({content: content});
     }
 

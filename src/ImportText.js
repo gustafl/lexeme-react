@@ -18,7 +18,6 @@ class ImportText extends Component {
     handleChange(event) {
         this.setState({previewHtml: event.target.value});
         this.setState({scrollHeight: event.target.scrollHeight});
-        console.log(event.target.scrollHeight);
     }
 
     handlePreview() {

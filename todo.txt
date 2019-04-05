@@ -1,3 +1,6 @@
 [ ] Autoresize textarea. https://github.com/andreypopp/react-textarea-autosize
 [ ] Style textarea scrollbars.
- 
+[ ] Clean incoming text.
+[ ] Implement markdown.
+[ ] Fix extra margin-top above Add Translation button.
+[ ] Adjust font-size with media queries.
