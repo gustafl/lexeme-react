@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/lexeme-react/precache-manifest.10c73dd09214b402a1afd051eb22f829.js"
+  "/lexeme-react/precache-manifest.752796ed30476cd04266c9492ab68a10.js"
 );
 
 workbox.clientsClaim();
