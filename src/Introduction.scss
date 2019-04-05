@@ -1,0 +1,14 @@
+@import '_colors';
+@import '_fonts';
+@import '_mixins';
+
+.introduction {
+    div {
+        text-align: center;
+        button {
+            padding-left: 2em;
+            padding-right: 2em;
+            margin-left: 20px;
+        }
+    }
+}

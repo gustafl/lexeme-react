@@ -1,0 +1,3 @@
+[ ] Autoresize textarea. https://github.com/andreypopp/react-textarea-autosize
+[ ] Style textarea scrollbars.
+ 

@@ -52,11 +52,9 @@ class Form extends Component {
             { id: 'massNoun', text: 'mass noun' }
         ];
 
-        const word = 'bizarre';
-
         return (
             <div>
-                <Word word={word} />
+                <Word word={this.props.textSelection} />
                 <Translations />
                 <SelectionButtonGroup buttons={lexicalCategoryButtons} />
                 <SelectionButtonGroup buttons={genderButtons} />

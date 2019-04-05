@@ -1,0 +1,27 @@
+@import '_colors';
+@import '_fonts';
+@import '_mixins';
+
+.import-text {
+    textarea {
+        width: 100%;
+        resize: vertical;
+        min-height: 200px;
+        border: 2px dashed darken($color1, 20%);
+        background-color: darken($color1, 5%);
+        padding: 18px 20px;
+        margin-bottom: 10px;
+        font-family: $font-old;
+    }
+    textarea:focus {
+        outline: none;
+    }
+    div {
+        text-align: center;
+        button {
+            padding-left: 2em;
+            padding-right: 2em;
+            margin-left: 20px;
+        }
+    }
+}

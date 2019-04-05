@@ -5,10 +5,11 @@ class HtmlContent extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            html: { __html: '<h1>Solen är rund</h1><p>En text som är bra. En krokodil äter &lt; 9 äpplen om dagen.</p>' },
+
         };
         this.isValidLetter = this.isValidLetter.bind(this);
-        this.selectionHandler = this.selectionHandler.bind(this);
+        this.getSelectedText = this.getSelectedText.bind(this);
+        this.handleMouseUp = this.handleMouseUp.bind(this);
     }
 
     isValidLetter(character) {
@@ -16,7 +17,7 @@ class HtmlContent extends Component {
         return (character !== '');
     }
 
-    selectionHandler() {
+    getSelectedText() {
         
         const SELECTION_MAX_LENGTH = 100;
     
@@ -123,6 +124,8 @@ class HtmlContent extends Component {
         // Get adjusted selected text
         var adjustedSelectedText = node.nodeValue.substring(start, end);
         console.info('A selection was made: %s (%d:%d)', adjustedSelectedText, start, end);
+        //this.setState({selection: adjustedSelectedText});
+        return adjustedSelectedText;
 
         // Remember this selection (in case we need to restore it)
         //window.lastSelection.node = node;
@@ -133,9 +136,15 @@ class HtmlContent extends Component {
         //changeWord(adjustedSelectedText);
     }
 
+    handleMouseUp() {
+        let selection = this.getSelectedText();
+        this.props.onSelection(selection);
+    }
+
     render() {
+        let html = {__html: this.props.content};
         return (
-            <div contentEditable="true" dangerouslySetInnerHTML={this.state.html} onMouseUp={this.selectionHandler}/>
+            <div className="html-content" dangerouslySetInnerHTML={html} onMouseUp={this.handleMouseUp}/>
         );
     }
 }
