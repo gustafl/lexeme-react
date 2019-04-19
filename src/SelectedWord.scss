@@ -1,7 +1,7 @@
 @import '_colors';
 @import '_fonts';
 
-div.word {
+div.selected-word {
     background-color: lighten($color3, 12%);
     color: darken($color5, 30%);
     margin-bottom: 0.5rem;

@@ -40,7 +40,7 @@ class App extends Component {
                 { (this.state.content.length > 0) ? <HtmlContent content={this.state.content} onSelection={this.handleSelection} /> : null }
             </article>
             <aside className="form">
-                <Form textSelection={this.state.currentTextSelection}/>
+                <Form language={'sv'} textSelection={this.state.currentTextSelection}/>
             </aside>
             <footer className="footer">Footer</footer>
         </div>

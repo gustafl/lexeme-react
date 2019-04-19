@@ -1,69 +1,49 @@
 import React, { Component } from 'react';
-import Word from './Word';
+import SelectedWord from './SelectedWord';
+import SimilarWords from './SimilarWords';
 import Translations from './Translations';
-import SelectionButtonGroup from './SelectionButtonGroup';
+//import SelectionButtonGroup from './SelectionButtonGroup';
 import './Form.scss';
 
 class Form extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            grammar: null,
+            isLoaded: false,
+        };
+        this.loadLanguage = this.loadLanguage.bind(this);
+    }
+
+    componentDidMount() {
+        if (!this.state.isLoaded) {
+            this.loadLanguage(this.props.language);
+        }
+    }
+
+    loadLanguage(code) {
+        let url = 'http://127.0.0.1:3001/language/' + code;
+        fetch(url, {mode: "cors"})
+        .then(function(response) {
+            if (response.ok) {
+                return response.json();
+            }
+            throw new Error('Network response was not ok.');
+        })
+        .then(myJson => {
+            this.setState({grammar: myJson});
+            this.setState({isLoaded: true}); 
+        }).catch(function(error) {
+            console.log(`The fetch from ${url} failed: ${error.message}`);
+        });
+    }
+
     render() {
-
-        const lexicalCategoryButtons = [
-            { id: 'noun', text: 'noun' },
-            { id: 'verb', text: 'verb' },
-            { id: 'adjective', text: 'adjective' },
-            { id: 'pronoun', text: 'pronoun' },
-            { id: 'adverb', text: 'adverb' },
-            { id: 'determiner', text: 'determiner' },
-            { id: 'preposition', text: 'preposition' },
-            { id: 'conjugation', text: 'conjugation' },
-            { id: 'interjection', text: 'interjection' }
-        ];
-
-        const genderButtons = [
-            { id: 'masculine', text: 'masculine' },
-            { id: 'feminine', text: 'feminine' }
-        ];
-
-        const numberButtons = [
-            { id: 'singular', text: 'singular' },
-            { id: 'plural', text: 'plural' }
-        ];
-
-        const properCommonButtons = [
-            { id: 'proper', text: 'proper' },
-            { id: 'common', text: 'common' }
-        ];
-
-        const abstractConcreteButtons = [
-            { id: 'abstract', text: 'abstract' },
-            { id: 'concrete', text: 'concrete' }
-        ];
-
-        const countableUncountableButtons = [
-            { id: 'countable', text: 'countable' },
-            { id: 'uncountable', text: 'uncountable' }
-        ];
-
-        const collectiveNounButtons = [
-            { id: 'collectiveNoun', text: 'collective noun' }
-        ];
-
-        const massNounButtons = [
-            { id: 'massNoun', text: 'mass noun' }
-        ];
-
         return (
             <div>
-                <Word word={this.props.textSelection} />
-                <Translations />
-                <SelectionButtonGroup buttons={lexicalCategoryButtons} />
-                <SelectionButtonGroup buttons={genderButtons} />
-                <SelectionButtonGroup buttons={numberButtons} />
-                <SelectionButtonGroup buttons={properCommonButtons} />
-                <SelectionButtonGroup buttons={abstractConcreteButtons} />
-                <SelectionButtonGroup buttons={countableUncountableButtons} />
-                <SelectionButtonGroup buttons={collectiveNounButtons} />
-                <SelectionButtonGroup buttons={massNounButtons} />
+                <SelectedWord word={this.props.textSelection} />
+                { (this.props.similarWords && this.props.similarWords.length > 0) ? <SimilarWords word={this.props.similarWords} /> : null }
+                { (this.props.translations && this.props.translations.length > 0) ? <Translations data={this.props.translations} /> : null }
             </div>
         );
     }
