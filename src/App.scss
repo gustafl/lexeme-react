@@ -59,18 +59,19 @@ h1, h2, h3, h4, h5, h6 {
     outline: none;
 }
 
-button {
+button, select, option {
     @include button-border;
     @include button-text;
     @include button-color;
     padding-bottom: 6px;
 }
 
-button:hover {
+button:hover, select:hover {
     transition: background-color 0.2s ease;
     background-color: lighten($color3, 4%);
 }
 
-button:focus {
+button:focus, select:focus {
     outline: none;
 }
+

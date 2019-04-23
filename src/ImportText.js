@@ -8,11 +8,13 @@ class ImportText extends Component {
         this.state = {
             showPreview: false,
             previewHtml: '',
-            textAreaHeight: 200
+            textAreaHeight: 200,
+            language: undefined
         };
         this.handleChange = this.handleChange.bind(this);
         this.handlePreview = this.handlePreview.bind(this);
         this.handleImport = this.handleImport.bind(this);
+        this.handleLanguageChange = this.handleLanguageChange.bind(this);
     }
 
     handleChange(event) {
@@ -30,6 +32,11 @@ class ImportText extends Component {
         this.props.onImport(html);
     }
 
+    handleLanguageChange(event) {
+        console.log(event);
+        this.props.onLanguageSelection(event.target.value);
+    }
+
     cleanHtml(html) {
         let div = document.createElement('div');
         div.innerHTML = html;
@@ -40,12 +47,21 @@ class ImportText extends Component {
     render() {
         let textAreaHeight = {height: this.state.textAreaHeight + 'px'};
         let previewHtml = {__html: this.state.previewHtml};
+        const languages = this.props.languages;
+        const selectItems = languages.map((language, index) => 
+            <option key={index} value={language}>{language}</option>
+        );
         return (
             <div className="import-text">
                 <h1>Import text</h1>
                 <p>Paste some text into the area below. HTML tags will be stripped, but markdown will be honored. When you click the button below, you can't change the text.</p>
                 <textarea value={this.state.previewHtml} onChange={this.handleChange} style={textAreaHeight} />
                 { (this.state.showPreview === true) ? <PreviewText content={previewHtml} onClick={this.handlePreview}/> : null }
+                <div className="language-selection">
+                    <select onChange={this.handleLanguageChange}>
+                        {selectItems}
+                    </select>
+                </div>
                 <div>
                     <button type="button" onClick={this.handlePreview}>preview</button>
                     <button type="button" onClick={this.handleImport}>import</button>

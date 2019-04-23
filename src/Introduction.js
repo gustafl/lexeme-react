@@ -2,6 +2,12 @@ import React, { Component } from 'react';
 import './Introduction.scss';
 
 class Introduction extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            language: null
+        };
+    }
     render() {
         return (
             <div className="introduction">
