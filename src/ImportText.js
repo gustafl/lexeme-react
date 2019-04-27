@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PreviewText from './PreviewText';
+import LanguageSelection from './LanguageSelection';
 import './ImportText.scss';
 
 class ImportText extends Component {
@@ -32,8 +33,7 @@ class ImportText extends Component {
         this.props.onImport(html);
     }
 
-    handleLanguageChange(event) {
-        let languageCode = event.target.value;
+    handleLanguageChange(languageCode) {
         this.props.onLanguageSelection(languageCode);
     }
 
@@ -47,21 +47,13 @@ class ImportText extends Component {
     render() {
         let textAreaHeight = {height: this.state.textAreaHeight + 'px'};
         let previewHtml = {__html: this.state.previewHtml};
-        const languages = this.props.languages;
-        const selectItems = languages.map((language, index) => 
-            <option key={index} value={language}>{language}</option>
-        );
         return (
             <div className="import-text">
                 <h1>Import text</h1>
                 <p>Paste some text into the area below. HTML tags will be stripped, but markdown will be honored. When you click the button below, you can't change the text.</p>
                 <textarea value={this.state.previewHtml} onChange={this.handleChange} style={textAreaHeight} />
                 { (this.state.showPreview === true) ? <PreviewText content={previewHtml} onClick={this.handlePreview}/> : null }
-                <div className="language-selection">
-                    <select onChange={this.handleLanguageChange}>
-                        {selectItems}
-                    </select>
-                </div>
+                <LanguageSelection languages={this.props.languages} onLanguageSelection={this.handleLanguageChange} />
                 <div>
                     <button type="button" onClick={this.handlePreview}>preview</button>
                     <button type="button" onClick={this.handleImport}>import</button>
