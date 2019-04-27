@@ -28,6 +28,7 @@ class App extends Component {
 
     handleImport(content) {
         this.setState({content: content});
+        this.setState({languages: undefined});
     }
 
     handleSelection(text) {
@@ -35,7 +36,6 @@ class App extends Component {
     }
 
     handleLanguageSelection(code) {
-        console.log(code);
         this.setState({selectedLanguage: code});
     }
 
@@ -55,7 +55,12 @@ class App extends Component {
             throw new Error('Network response was not ok.');
         })
         .then(myJson => {
-            this.setState({languages: myJson});
+            if (myJson.length > 0) {
+                this.setState({languages: myJson});
+                this.setState({selectedLanguage: myJson[0]});
+            } else {
+                throw new Error('No available languages.');
+            }
         }).catch(function(error) {
             console.log(`The fetch from ${url} failed: ${error.message}`);
         });
@@ -71,7 +76,7 @@ class App extends Component {
                 { (this.state.content.length > 0) ? <HtmlContent content={this.state.content} onSelection={this.handleSelection} /> : null }
             </article>
             <aside className="form">
-                <Form language={'sv'} textSelection={this.state.currentTextSelection}/>
+                { (this.state.content.length > 0) ? <Form language={this.state.selectedLanguage} textSelection={this.state.currentTextSelection}/> : null }
             </aside>
             <footer className="footer">Footer</footer>
         </div>

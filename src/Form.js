@@ -9,19 +9,21 @@ class Form extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            grammar: null,
-            isLoaded: false,
+            grammar: null
         };
         this.loadLanguage = this.loadLanguage.bind(this);
     }
 
     componentDidMount() {
-        if (!this.state.isLoaded) {
+        if (!this.state.grammar) {
             this.loadLanguage(this.props.language);
         }
     }
 
     loadLanguage(code) {
+        if (!code) {
+            return;
+        }
         let url = 'http://127.0.0.1:3001/language/' + code;
         fetch(url, {mode: "cors"})
         .then(function(response) {
@@ -32,7 +34,6 @@ class Form extends Component {
         })
         .then(myJson => {
             this.setState({grammar: myJson});
-            this.setState({isLoaded: true}); 
         }).catch(function(error) {
             console.log(`The fetch from ${url} failed: ${error.message}`);
         });

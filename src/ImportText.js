@@ -33,8 +33,8 @@ class ImportText extends Component {
     }
 
     handleLanguageChange(event) {
-        console.log(event);
-        this.props.onLanguageSelection(event.target.value);
+        let languageCode = event.target.value;
+        this.props.onLanguageSelection(languageCode);
     }
 
     cleanHtml(html) {
