@@ -10,7 +10,7 @@
 
 @mixin button-text {
     font-family: $font-monospace;
-    font-variant: small-caps;
+    font-variant-caps: all-small-caps;
     font-weight: bold;
     overflow: hidden;
     text-align: center;

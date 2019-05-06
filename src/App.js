@@ -13,7 +13,7 @@ class App extends Component {
             content: '',
             currentTextSelection: null,
             languages: [],
-            selectedLanguage: null
+            selectedLanguage: ''
         };
         this.handleIntro = this.handleIntro.bind(this);
         this.handleImport = this.handleImport.bind(this);

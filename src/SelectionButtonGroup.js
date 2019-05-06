@@ -2,6 +2,18 @@ import React, { Component } from 'react';
 import SelectionButton from './SelectionButton';
 import './SelectionButtonGroup.scss';
 
+/**
+ * A group of buttons.
+ * 
+ * Props
+ *   groupName -- The name of the property that the button group represents. Returned along with the current selection.
+ *   buttons -- An array of button objects.
+ *   onClick() -- Event handler for button clicks. Returns an object with groupId and groupValue properties.
+ * 
+ * State
+ *   buttons -- holds the toggle state of each button
+ */
+
 class SelectionButtonGroup extends Component {
     constructor(props) {
         super(props);
@@ -11,11 +23,16 @@ class SelectionButtonGroup extends Component {
     }
 
     handleClick(index) {
-        const buttons = this.state.buttons.slice();
-        let clickedButton = buttons[index];
-        buttons.fill(false);
-        buttons[index] = !clickedButton;
-        this.setState({buttons: buttons});
+        const buttons = this.state.buttons.slice();             // Make copy of buttons array
+        let clickedButtonState = buttons[index];                // Get the boolean value of the clicked button
+        buttons.fill(false);                                    // Reset all buttons to false
+        buttons[index] = !clickedButtonState;                   // Toggle the clicked button
+        this.setState({buttons: buttons});                      // Update the buttons array
+        let obj = {};
+        if (buttons[index]) {                                   // If the last button-click resulted in an active button
+            obj[this.props.groupName] = this.props.buttons[index].id;
+        }
+        this.props.onClick(obj);
     }
 
     getNumberOfColumns() {

@@ -8,7 +8,7 @@ class ImportText extends Component {
         super(props);
         this.state = {
             showPreview: false,
-            previewHtml: '',
+            previewHtml: 'Det är aldrig för sent att ge upp.',
             textAreaHeight: 200,
             language: undefined
         };

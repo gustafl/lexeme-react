@@ -5,7 +5,7 @@ class SimilarWords extends Component {
     render() {
         return (
             <div className="similar-words">
-                
+                Similar words goes here.
             </div>
         );
     }
