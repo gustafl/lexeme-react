@@ -4,8 +4,9 @@
   "private": true,
   "homepage": "https://gustafl.github.io/lexeme-react",
   "dependencies": {
-    "gh-pages": "^2.0.1",
     "classnames": "^2.2.6",
+    "gh-pages": "^2.0.1",
+    "lodash": "^4.17.11",
     "node-sass": "^4.11.0",
     "react": "^16.8.2",
     "react-dom": "^16.8.2",

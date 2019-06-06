@@ -16,26 +16,11 @@ class LexicalCategory extends Component {
     }
 
     render() {
-        let grammar = this.props.grammar;
-        let groupName = 'lexicalCategory';
-        let buttons = [];
-
-        if (grammar.hasOwnProperty('lexicalCategories')) {
-            let lexicalCategories = grammar.lexicalCategories;
-            for (let lc in lexicalCategories) {
-                let lexicalCategory = lexicalCategories[lc];
-                if (lexicalCategory.display) {
-                    buttons.push({
-                        id: lexicalCategory.name,
-                        text: lexicalCategory.label
-                    });
-                }
-            }
-        }
+        
 
         return (
             <div>
-                <SelectionButtonGroup groupName={groupName} buttons={buttons} onClick={this.handleClick}/>
+                <SelectionButtonGroup buttons={this.props.buttons} onClick={this.handleClick}/>
             </div>
         );
     }

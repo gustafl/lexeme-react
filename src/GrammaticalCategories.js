@@ -44,8 +44,8 @@ class GrammaticalCategories extends Component {
                                 if (grammaticalCategoryValue.display) {
                                     // Add the grammatical category value
                                     values.push({
-                                        id: grammaticalCategoryValue.name,
-                                        text: grammaticalCategoryValue.label
+                                        id: grammaticalCategoryValue.id,
+                                        text: grammaticalCategoryValue.name
                                     });
                                 }
                             }

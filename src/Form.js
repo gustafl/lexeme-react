@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
+import _ from 'lodash';
 import SelectedWord from './SelectedWord';
 import SimilarWords from './SimilarWords';
 import Translations from './Translations';
-import LexicalCategory from './LexicalCategory';
-import GrammaticalCategories from './GrammaticalCategories';
+import SelectionButtonGroup from './SelectionButtonGroup';
 import './Form.scss';
 
 class Form extends Component {
@@ -11,21 +11,24 @@ class Form extends Component {
         super(props);
         this.state = {
             grammar: {},
-            lexicalCategory: "",
+            lexicalCategory: '',
             grammaticalCategories: []
         };
-        this.loadLanguage = this.loadLanguage.bind(this);
-        this.handleLexicalCategoryChange = this.handleLexicalCategoryChange.bind(this);
-        this.handleGrammaticalCategoryChange = this.handleGrammaticalCategoryChange.bind(this);
+        this.loadGrammar = this.loadGrammar.bind(this);
+        this.getLexicalCategoryButtons = this.getLexicalCategoryButtons.bind(this);
+        this.getGrammaticalCategories = this.getGrammaticalCategories.bind(this);
+        this.getGrammaticalCategoryButtons = this.getGrammaticalCategoryButtons.bind(this);
+        this.handleClick = this.handleClick.bind(this);
+        this.setGrammaticalCategory = this.setGrammaticalCategory.bind(this);
     }
 
     componentDidMount() {
-        if (!this.state.grammar.hasOwnProperty('language')) {
-            this.loadLanguage(this.props.language);
+        if (Object.keys(this.state.grammar).length === 0) {
+            this.loadGrammar(this.props.language);
         }
     }
 
-    loadLanguage(language) {
+    loadGrammar(language) {
         if (!language) {
             throw new Error('Language was not specified.');
         }
@@ -38,30 +41,145 @@ class Form extends Component {
             throw new Error('Network response was not ok.');
         })
         .then(myJson => {
+            console.log('Grammar loaded: ' + language);
             this.setState({grammar: myJson});
         }).catch(function(error) {
             console.log(`The fetch from ${url} failed: ${error.message}`);
         });
     }
 
-    handleLexicalCategoryChange(lexicalCategory) {
-        console.log('Now setting lexical category and resetting grammatical categories.');
-        this.setState({lexicalCategory: lexicalCategory});
-        this.setState({grammaticalCategories: []});
+    getGrammaticalCategories() {
+        if (this.state.grammar.hasOwnProperty('lexicalCategories')) {
+            let lexicalCategories = this.state.grammar.lexicalCategories;
+            for (let lc in lexicalCategories) {
+                let lexicalCategory = lexicalCategories[lc];
+                if (lexicalCategory.id === this.state.lexicalCategory) {
+                    return lexicalCategory.grammaticalCategories;
+                }
+            }
+        }
     }
 
-    handleGrammaticalCategoryChange(grammaticalCategories) {
-        this.setState({grammaticalCategories: grammaticalCategories});
+    setGrammaticalCategory(key, value) {
+        let temp = this.state.grammaticalCategories.slice();
+        let existing = _.find(temp, key);  // Returns undefined if not found.
+        if (existing) {
+            existing[key] = value;
+        } else {
+            let obj = {};
+            obj[key] = value;
+            temp.push(obj);
+        }
+        this.setState({grammaticalCategories: temp}, function () {
+            console.log(JSON.stringify(this.state.grammaticalCategories));
+        });  
+    }
+
+    getLexicalCategoryButtons() {
+        let grammar = this.state.grammar;
+        let buttons = [];
+
+        if (grammar.hasOwnProperty('lexicalCategories')) {
+            let lexicalCategories = grammar.lexicalCategories;
+            for (let lc in lexicalCategories) {
+                let lexicalCategory = lexicalCategories[lc];
+                if (lexicalCategory.display) {
+                    buttons.push({
+                        id: lexicalCategory.id,
+                        text: lexicalCategory.name,
+                        isOn: (this.state.lexicalCategory === lexicalCategory.id)
+                    });
+                }
+            }
+        }
+
+        return buttons;
+    }
+
+    getGrammaticalCategoryButtons() {
+        console.log('getGrammaticalCategoryButtons() called.');
+        let lexicalCategory = this.state.lexicalCategory;
+        let grammaticalCategories = this.getGrammaticalCategories(lexicalCategory);
+        let rows = [];
+
+        // Loop through grammatical categories
+        for (let gc in grammaticalCategories) {
+            let grammaticalCategory = grammaticalCategories[gc];
+            // If the grammatical category should be displayed
+            if (grammaticalCategory.display) {
+                let grammaticalCategoryValues = grammaticalCategory.values;
+                let values = [];
+                // Loop through the values of the grammatical category
+                for (let gcv in grammaticalCategoryValues) {
+                    let grammaticalCategoryValue = grammaticalCategoryValues[gcv];
+                    // If the value of the grammatical category should be displayed
+                    if (grammaticalCategoryValue.display) {
+                        let existing = _.find(this.state.grammaticalCategories, grammaticalCategory.id);
+                        let isOn = false;
+                        if (existing) {
+                            isOn = (existing[grammaticalCategory.id] === grammaticalCategoryValue.id);
+                        }
+                        // Add the grammatical category value
+                        values.push({
+                            id: grammaticalCategoryValue.id,
+                            text: grammaticalCategoryValue.name,
+                            isOn: isOn
+                        });
+                    }
+                }
+                // Add the grammatical category
+                rows.push({
+                    id: grammaticalCategory.id,
+                    text: grammaticalCategory.name,
+                    values: values
+                });
+            }
+        }
+
+        return rows;
+    }
+
+    handleClick(button) {
+        if (button.group === 'lexicalCategory') {
+            this.setState({lexicalCategory: button.id});
+            this.setState({grammaticalCategories: []});
+        } else {
+            this.setGrammaticalCategory(button.group, button.id);
+        }
     }
 
     render() {
+        let lexicalCategories = [];
+        let rows = [];
+
+        // Don't render anything unless the grammar is loaded
+        if (Object.keys(this.state.grammar).length > 0) {
+            lexicalCategories = this.getLexicalCategoryButtons();
+        }
+
+        if (this.state.lexicalCategory) {
+            rows = this.getGrammaticalCategoryButtons();
+        }
+        
+        let buttonRows = [];
+        if (rows) {
+            // Make one button group for each grammatical category, with buttons for each value
+            buttonRows = rows.map((row, index) =>
+                <SelectionButtonGroup key={index} name={row.id} buttons={row.values} onClick={this.handleClick} />
+            );
+            //console.log(JSON.stringify(rows));
+            //console.log(JSON.stringify(buttonRows));
+        }
+
+    //& 
+        
         return (
             <div>
                 <SelectedWord word={this.props.textSelection} />
                 { (this.props.textSelection) ? <SimilarWords word={this.props.similarWords} /> : null }
                 { (this.props.textSelection) ? <Translations data={this.props.translations} /> : null }
-                { (this.props.textSelection) ? <LexicalCategory grammar={this.state.grammar} onChange={this.handleLexicalCategoryChange} /> : null }
-                { (this.state.lexicalCategory) ? <GrammaticalCategories grammar={this.state.grammar} lexicalCategory={this.state.lexicalCategory} onChange={this.handleGrammaticalCategoryChange} /> : null }
+                { (this.props.textSelection) ? <SelectionButtonGroup name={'lexicalCategory'} buttons={lexicalCategories} onClick={this.handleClick} /> : null }
+                { (this.props.textSelection) ? <div>{buttonRows}</div> : null }
             </div>
         );
     }
