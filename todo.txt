@@ -1,17 +1,21 @@
-[ ] Show boolean-buttons.
-[ ] Make button value a part of the button object.
-[ ] Make language selection its own component.
-[x] Store current language as a state in App.
-[x] Set language when importing text.
-[ ] Autoresize textarea. https://github.com/andreypopp/react-textarea-autosize
-[ ] Style textarea scrollbars.
-[ ] Clean incoming text.
-[ ] Implement markdown.
-[ ] Fix extra margin-top above Add Translation button.
-[ ] Adjust font-size with media queries.
-[ ] Adjust font-size in language selection dropdown.
-[ ] Add a Save button.
-[ ] Implement save to local storage.
+Save words
+  [ ] Add a Save button.
+  [ ] Implement save to local storage.
+
+Components
+  [ ] Make language selection its own component.
+
+Raw text input
+  [ ] Autoresize textarea. https://github.com/andreypopp/react-textarea-autosize
+  [ ] Style textarea scrollbars.
+  [ ] Clean incoming text.
+  [ ] Implement markdown.
+
+Styling
+  [ ] Fix extra margin-top above Add Translation button.
+  [ ] Adjust font-size with media queries.
+  [ ] Adjust font-size in language selection dropdown.
+
 
 Out of scope for now:
 - compound words
