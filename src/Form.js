@@ -20,6 +20,7 @@ class Form extends Component {
         this.getGrammaticalCategoryButtons = this.getGrammaticalCategoryButtons.bind(this);
         this.handleClick = this.handleClick.bind(this);
         this.setGrammaticalCategory = this.setGrammaticalCategory.bind(this);
+        this.updateHighlights = this.updateHighlights.bind(this);
     }
 
     componentDidMount() {
@@ -148,6 +149,16 @@ class Form extends Component {
         }
     }
 
+    handleSave() {
+        let key = this.props.language + '.' + this.state.lexicalCategory + '.' + this.props.textSelection
+        localStorage.setItem(key, this.state.grammaticalCategories);
+        this.updateHighlights();
+    }
+
+    updateHighlights() {
+        console.log('updateHighlights');
+    }
+
     render() {
         let lexicalCategories = [];
         let rows = [];
@@ -180,6 +191,7 @@ class Form extends Component {
                 { (this.props.textSelection) ? <Translations data={this.props.translations} /> : null }
                 { (this.props.textSelection) ? <SelectionButtonGroup name={'lexicalCategory'} buttons={lexicalCategories} onClick={this.handleClick} /> : null }
                 { (this.props.textSelection) ? <div>{buttonRows}</div> : null }
+                { (this.props.textSelection && this.state.lexicalCategory) ? <div><button type="button" onClick={() => this.handleSave()}>Save</button></div> : null }
             </div>
         );
     }

@@ -150,3 +150,7 @@ class HtmlContent extends Component {
 }
 
 export default HtmlContent;
+
+/*
+<span data-word="sv.valmöjlighet">
+*/

@@ -1,6 +1,24 @@
+[ ] Show boolean-buttons.
+[ ] Make button value a part of the button object.
+[ ] Make language selection its own component.
+[x] Store current language as a state in App.
+[x] Set language when importing text.
 [ ] Autoresize textarea. https://github.com/andreypopp/react-textarea-autosize
 [ ] Style textarea scrollbars.
 [ ] Clean incoming text.
 [ ] Implement markdown.
 [ ] Fix extra margin-top above Add Translation button.
 [ ] Adjust font-size with media queries.
+[ ] Adjust font-size in language selection dropdown.
+[ ] Add a Save button.
+[ ] Implement save to local storage.
+
+Out of scope for now:
+- compound words
+- expressions
+- pronounciation
+
+Button behavior:
+- When selecting a new word, LexicalCategory and GrammaticalCategories should both be reset,
+  unless the word is tagged, in which case they should be set to the state of the tagged word.
+- When selecting a new LexicalCategory, the GrammaticalCategories should be reset.
